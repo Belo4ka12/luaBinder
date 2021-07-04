@@ -3134,39 +3134,39 @@ function ev.onShowDialog(dialogid, style, title, button1, button2, text)
 				istakesomeone = false
 				if AutoDeagle then
 					local a = getAmmoInCharWeapon(PLAYER_PED, 24)
-					if a <= 21 then sampSendDialogResponse(dialogid, 1, 0, "") istakesomeone = true isdeagletaken = true return false end
+					if a <= 61 then sampSendDialogResponse(dialogid, 1, 0, "") istakesomeone = true isdeagletaken = true return false end
 				end
 
 				if AutoShotgun then
 					local a = getAmmoInCharWeapon(PLAYER_PED, 25)
-					if a <= 30 then sampSendDialogResponse(dialogid, 1, 1, "") istakesomeone = true isshotguntaken = true return false end
+					if a <= 28 then sampSendDialogResponse(dialogid, 1, 1, "") istakesomeone = true isshotguntaken = true return false end
 				end
 
 				if AutoSMG then
 					local a = getAmmoInCharWeapon(PLAYER_PED, 29)
-					if a <= 90 then sampSendDialogResponse(dialogid, 1, 2, "") istakesomeone = true issmgtaken = true return false end
+					if a <= 178 then sampSendDialogResponse(dialogid, 1, 2, "") istakesomeone = true issmgtaken = true return false end
 				end
 
 				if AutoM4A1 then
 					local a = getAmmoInCharWeapon(PLAYER_PED, 31)
-					if a <= 150 then sampSendDialogResponse(dialogid, 1, 3, "") istakesomeone = true ism4a1taken = true return false end
+					if a <= 290 then sampSendDialogResponse(dialogid, 1, 3, "") istakesomeone = true ism4a1taken = true return false end
 				end
 
 				if AutoRifle then
 					local a = getAmmoInCharWeapon(PLAYER_PED, 33)
-					if a <= 30 then sampSendDialogResponse(dialogid, 1, 4, "") istakesomeone = true isrifletaken = true return false end
+					if a <= 28 then sampSendDialogResponse(dialogid, 1, 4, "") istakesomeone = true isrifletaken = true return false end
 				end
 
-				if AutoPar then
+				if AutoPar and (os.time() > partimer) then
 					local a = getAmmoInCharWeapon(PLAYER_PED, 46)
-					if a ~= 1 then sampSendDialogResponse(dialogid, 1, 6, "") istakesomeone = true ispartaken = true return false end
+					if a ~= 1 then sampSendDialogResponse(dialogid, 1, 6, "") istakesomeone = true ispartaken = true partimer = os.time() + 60 return false end
 				end
 
 				if not isarmtaken then sampSendDialogResponse(dialogid, 1, 5, "") istakesomeone = true isarmtaken = true return false end
 
 				if not istakesomeone then
 						if AutoOt then
-							 	local otsrt = ""
+								local otsrt = ""
 								if isarmtaken then otsrt = "бронежилет" end
 								if isdeagletaken then otsrt = otsrt == "" and "Desert Eagle" or "" .. otsrt .. ", Desert Eagle" end
 								if isshotguntaken then otsrt = otsrt == "" and "Shotgun" or "" .. otsrt .. ", Shotgun" end
