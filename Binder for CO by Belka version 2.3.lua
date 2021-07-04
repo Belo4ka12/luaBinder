@@ -908,6 +908,7 @@ local AutoM4A1 = config_ini.bools[21] == 1 and true or false
 local AutoRifle = config_ini.bools[22] == 1 and true or false
 local AutoPar = config_ini.bools[23] == 1 and true or false
 local AutoOt = config_ini.bools[24] == 1 and true or false
+local partimer = 0
 local istakesomeone = false -- булев было ли хоть что-то взято
 -- зажатие клавиши движения
 local needtohold = false
