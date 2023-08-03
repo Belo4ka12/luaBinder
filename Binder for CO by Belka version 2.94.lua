@@ -4607,7 +4607,7 @@ function main()
 							sampRegisterChatCommand("mon", cmd_mon)
 							sampRegisterChatCommand("get", cmd_get)
 							sampRegisterChatCommand("freeze", cmd_freeze)
-						--	sampRegisterChatCommand("refoffm", cmd_refoffm)
+							sampRegisterChatCommand("refoffm", cmd_refoffm)
 							
 
 							if access.alevel > -1 then
@@ -7073,6 +7073,13 @@ function getMembersText()
 			if zv ~= nil then 
 				temparr[name] = zv
 				other.offmembers[name] = zv 
+
+				local r, h = sampGetCharHandleBySampPlayerId(id)
+				if r and config_ini.bools[35] == 1 then
+					if sampIs3dTextDefined(2048 - id) then sampDestroy3dText(2048 - id) end
+					local color = (other.offmembers[name] == "Майор" or other.offmembers[name] == "Подполковник" or other.offmembers[name] == "Полковник" or other.offmembers[name] == "Генерал") and 0xFF00BFFF or 0xFFFFFAFA
+					sampCreate3dTextEx(2048 - id, other.offmembers[name], color, 0, 0, 0.4, 22, false, id, -1)
+				end
 			end 
 		end -- добавляем текущий мемберс во временный массив
 		
