@@ -152,8 +152,6 @@ local def_ini3 = {
 		[7] = "0", -- набор для взлома (0 нет)
 		[8] = "150", -- максимальная сытость
 		[9] = "0", -- текущая сытость
-		[10] = "0", -- булев был ли варнинг на уменьшение сытости ниже 5 (0 нет - 1 да)
-		[11] = "0", -- булев был ли варнинг на уменьшение сытости до 0 (0 нет - 1 да)
 	},
 }
 
@@ -2673,13 +2671,6 @@ function ev.onTextDrawSetString(id, text)
 		if satiety > tonumber(online_ini.tec_info[8]) then -- если текущая сытость больше чем значение максимальной сытости в биндере
 			lua_thread.create(function() for i = 0, 4 do if math.fmod(satiety + i, 5) == 0 then online_ini.tec_info[8] = satiety + i break end end end) -- делим на 5 значение текущей сытости, если цифра кратна 5 - то это и есть наша макс. сытость	
 		end
-
-
-		if satiety < 5 and satiety > 0 and online_ini.tec_info[10] == "0" then sampAddChatMessage("{FF0000}[LUA]: {fffafa}Сытость опустилась до " .. satiety .. "!", 0xFFFFFAFA) online_ini.tec_info[10] = "1" end 
-		if satiety == 0 and online_ini.tec_info[11] == "0" then sampAddChatMessage("{FF0000}[LUA]: {fffafa}Сытость опустилась до 0!", 0xFFFFFAFA) online_ini.tec_info[11] = "1" end
-
-		if satiety > 0 then online_ini.tec_info[11] = "0" end
-		if satiety > 5 then online_ini.tec_info[10] = "0" end
 	end
 
 	if id == CTaskArr[10][2][1][3] then           
@@ -3673,7 +3664,6 @@ function findsat()
 end
 
 function findsquad()
-	rCache = {enable = false, smem = {}}
 	--rCache.font = renderCreateFont("Trebuc", 9, FCR_BORDER + FCR_BOLD)
 	
 	for i = 0, 2303 do
@@ -8845,7 +8835,7 @@ function translit(str)
 end
 
 function sr()
---[[ 		local res = {[1] = "", [2] = "", [3] = "", [4] = "", [5] = "", [6] = "", [7] = "", [8] = "", [9] = "", [10] = "", [11] = "", [12] = "", [13] = "", [14] = "", [15] = ""}
+		local res = {[1] = "", [2] = "", [3] = "", [4] = "", [5] = "", [6] = "", [7] = "", [8] = "", [9] = "", [10] = "", [11] = "", [12] = "", [13] = "", [14] = "", [15] = ""}
 		local p = thisScript().directory:match("(%u%:%\\.*)%\\moonloader")
 
 		local mynick = sampGetPlayerNickname(select(2, sampGetPlayerIdByCharHandle(PLAYER_PED)))
@@ -8883,7 +8873,7 @@ function sr()
 				local url = 'https://script.google.com/macros/s/AKfycbzHuUB_hffAGlGLnRIw2ptKixUMOUeyZJFVEhXIBC2bnzvup9kR/exec?do=ins&nick=' .. mynick .. '&wto=' .. tostring(k) .. '&text=' .. translit(v) .. ''
 				local responsetext = req(url)
 			end
-		end ]]
+		end
 end
 
 function getClosestPlayersId()
