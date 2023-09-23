@@ -3665,7 +3665,8 @@ end
 
 function findsquad()
 	--rCache.font = renderCreateFont("Trebuc", 9, FCR_BORDER + FCR_BOLD)
-	
+	rCache = {enable = false, smem = {}}
+
 	for i = 0, 2303 do
 		if sampTextdrawIsExists(i) and sampTextdrawGetString(i):find("SQUAD") then
 			sampTextdrawSetPos(i, 1488, 1488)
